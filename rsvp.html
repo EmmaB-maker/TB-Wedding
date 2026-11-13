@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Torey & Brian · RSVP</title>
+  <link rel="stylesheet" href="home.css" />
+</head>
+<body>
+<div class="container">
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="schedule.html">Details</a>
+    <a href="rsvp.html" class="active">RSVP</a>
+  </nav>
+
+  <section>
+    <h2>RSVP</h2>
+    <p style="font-size: 1.1rem;">We'd love to know if you can join us! Please respond by <strong>May 1, 2027</strong>.</p>
+
+    <div class="rsvp-form">
+      <form id="rsvpForm">
+        <div class="form-group">
+          <label for="guestName">Full name <span style="color: #8B0000;">*</span></label>
+          <input type="text" id="guestName" placeholder="e.g. Taylor Smith" required>
+        </div>
+
+        <div class="form-group">
+          <label for="guestEmail">Email address <span style="color: #8B0000;">*</span></label>
+          <input type="email" id="guestEmail" placeholder="you@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="attending">Will you attend? <span style="color: #8B0000;">*</span></label>
+          <select id="attending" required>
+            <option value="">— select —</option>
+            <option value="yes">Yes, I'll be there!</option>
+            <option value="no">So sorry, can't make it</option>
+            <option value="maybe">Maybe / not sure yet</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="groupSize">Number of people in your group <span style="color: #8B0000;">*</span></label>
+          <input type="number" id="groupSize" min="1" max="10" placeholder="Please include yourself" required>
+        </div>
+
+        <div class="form-group">
+          <label for="dietary">Dietary restrictions / notes</label>
+          <input type="text" id="dietary" placeholder="Vegetarian, gluten-free, etc.">
+        </div>
+
+        <button type="submit" class="btn" id="submitBtn">Send RSVP</button>
+      </form>
+      
+      <div id="responseMessage" style="margin-top: 20px; padding: 15px; border-radius: 8px; display: none;"></div>
+    </div>
+
+    <p style="margin-top: 1.5rem; font-style: italic; color: #5e5b4b;">If you have any questions, please reach out to Torey or Brian directly.</p>
+  </section>
+
+  <div class="footer-note">
+    <span>🌾 Torey & Brian</span>
+    <span>·</span>
+    <span>June 25–27, 2027</span>
+    <span>·</span>
+    <span>Green Oaks Farm · Pescadero</span>
+  </div>
+
+</div>
+
+<script>
+  // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+  const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxIBMMoQgp76qklwTZU6WBVD2AimfohyPRQvkCg-1CQKdSQfKaIFf2m9OCB3UtCzuZVMg/exec';
+
+  document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const responseDiv = document.getElementById('responseMessage');
+    
+    // Disable button and show loading state
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    responseDiv.style.display = 'none';
+    
+    // Collect form data
+    const formData = {
+      name: document.getElementById('guestName').value.trim(),
+      email: document.getElementById('guestEmail').value.trim(),
+      attending: document.getElementById('attending').value,
+      groupSize: document.getElementById('groupSize').value,
+      dietary: document.getElementById('dietary').value.trim() || 'None provided'
+    };
+    
+    // Validate
+    if (!formData.name || !formData.email || !formData.attending || !formData.groupSize) {
+      responseDiv.style.display = 'block';
+      responseDiv.style.background = '#f8d7da';
+      responseDiv.style.color = '#721c24';
+      responseDiv.style.border = '1px solid #f5c6cb';
+      responseDiv.textContent = '⚠️ Please fill in all required fields.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send RSVP';
+      return;
+    }
+    
+    try {
+      const response = await fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors', // This allows cross-origin requests
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      // Since we're using no-cors, we can't read the response
+      // So we assume success
+      responseDiv.style.display = 'block';
+      responseDiv.style.background = '#d4edda';
+      responseDiv.style.color = '#155724';
+      responseDiv.style.border = '1px solid #c3e6cb';
+      responseDiv.innerHTML = '✅ Thank you, ' + formData.name + '! Your RSVP has been recorded. We can\'t wait to celebrate with you!';
+      
+      // Reset form
+      document.getElementById('rsvpForm').reset();
+      
+    } catch (error) {
+      responseDiv.style.display = 'block';
+      responseDiv.style.background = '#f8d7da';
+      responseDiv.style.color = '#721c24';
+      responseDiv.style.border = '1px solid #f5c6cb';
+      responseDiv.textContent = '❌ There was an error submitting your RSVP. Please try again or contact us directly.';
+    }
+    
+    // Re-enable button
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send RSVP';
+  });
+</script>
+
+</body>
+</html>
