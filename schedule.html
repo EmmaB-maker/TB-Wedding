@@ -238,94 +238,7 @@
   <!-- ==================== DETAILS SECTION ==================== -->
   <section>
     <h2>Weekend Details</h2>
-    <p style="font-size: 1.1rem; margin-bottom: 1.8rem;">All events at <strong>Green Oaks Farm</strong> — 1235 Verde Valley Lane, Pescadero, CA.</p>
-
-    <h3>Friday, June 25 · Welcome</h3>
-    <div class="schedule-item"><span class="time">TIME</span><span class="desc">PLAN · DRESS CODE</span></div>
-
-    <h3 style="margin-top: 2rem;">Saturday, June 26 · Ceremony & Reception</h3>
-    <div class="schedule-item"><span class="time">TIME</span><span class="desc">PLAN · DRESS CODE</span></div>
-
-    <h3 style="margin-top: 2rem;">Sunday, June 27 · Farewell</h3>
-    <div class="schedule-item"><span class="time">TIME</span><span class="desc">PLAN · DRESS CODE</span></div>
-
-    <div class="highlight" style="margin-top: 2.5rem;">
-      <p><strong>Getting there:</strong> Parking is available on-site? PUT ADDRESS HERE / GOOGLE MAPS LINK</p>
-      <p style="margin-top: 0.5rem;"><strong>Accommodations:</strong> SUGGESTION OF WHERE THEY CAN STAY</p>
-      <p style="margin-top: 0.5rem;"><strong>Likely Weather:</strong> INFO ON WHAT THE WEATHER COULD LOOK LIKE</p>
-    </div>
-  </section>
-
-  <!-- ==================== MAP SECTION ==================== -->
-  <section class="map-section">
-    <h2>Green Oaks Farm Map</h2>
-    <p style="text-align: center; margin-bottom: 1.5rem;">📍 Click on any marker to learn more about that location!</p>
-
-    <div class="map-wrapper">
-      <!-- YOUR MAP IMAGE -->
-      <img src="Profile.PNG" alt="Green Oaks Farm Map" width="900" height="600">
-      
-      <!-- ============================================================ -->
-      <!-- MARKERS - Transparent with colored outline + colored star     -->
-      <!-- ============================================================ -->
-      
-      <!-- Eye -->
-      <div class="map-marker marker-ceremony" 
-           style="left: 50%; top: 33%;" 
-           onclick="showLocation('Emmas Eye', 'Her eyes are a hazel with sunlight but technically just brown.', 'Found on her face')">
-        <span class="label">✦</span>
-        <span class="tooltip">Eye</span>
-      </div>
-      
-      <!-- Shirt -->
-      <div class="map-marker marker-reception" 
-           style="left: 60%; top: 70%;" 
-           onclick="showLocation('Emmas Shirt', 'A pretty green she likes to wear to conferences.', 'found in her closet 24/7')">
-        <span class="label">✦</span>
-        <span class="tooltip">Shirt</span>
-      </div>
-      
-      <!-- Leaf -->
-      <div class="map-marker marker-campground" 
-           style="left: 22%; top: 70%;" 
-           onclick="showLocation('Leaf', 'There are many in the background.', 'Available in san francisco')">
-        <span class="label">✦</span>
-        <span class="tooltip">Leaf</span>
-      </div>
-      
-      <!-- ============================================================ -->
-      <!-- END OF MARKERS                                                -->
-      <!-- ============================================================ -->
-      
-    </div>
-    
-    <!-- Location Info Display -->
-    <div id="locationInfo">
-      <h3 id="locationName"></h3>
-      <p id="locationDescription" style="font-size: 1.1rem;"></p>
-      <p id="locationTime" style="font-style: italic; color: #5d6e4a;"></p>
-      <button class="close-btn" onclick="closeLocationInfo()">Close</button>
-    </div>
-
-    <!-- Legend -->
-    <div class="map-legend">
-      <div class="legend-item">
-        <span class="legend-dot ceremony"></span>
-        Eye
-      </div>
-      <div class="legend-item">
-        <span class="legend-dot reception"></span>
-        Shirt
-      </div>
-      <div class="legend-item">
-        <span class="legend-dot campground"></span>
-        Leaf
-      </div>
-    </div>
-    
-    <div class="map-description">
-      💡 Hover over markers to see names, click for more details
-    </div>
+    <p style="font-size: 1.1rem; margin-bottom: 1.8rem; text-align: center;">Details coming soon.</p>
   </section>
 
   <!-- ==================== FOOTER ==================== -->
@@ -338,26 +251,6 @@
   </div>
 
 </div>
-
-<script>
-  function showLocation(name, description, time) {
-    const infoDiv = document.getElementById('locationInfo');
-    document.getElementById('locationName').textContent = '📍 ' + name;
-    document.getElementById('locationDescription').textContent = description;
-    document.getElementById('locationTime').textContent = time ? '🕐 ' + time : '';
-    
-    infoDiv.style.display = 'block';
-    
-    // Smooth scroll to the info box
-    setTimeout(() => {
-      infoDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 100);
-  }
-  
-  function closeLocationInfo() {
-    document.getElementById('locationInfo').style.display = 'none';
-  }
-</script>
 
 </body>
 </html>
